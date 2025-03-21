@@ -15,6 +15,11 @@ import MlModels from "@/pages/ml-models";
 import Admin from "@/pages/admin";
 import { AuthProvider } from "@/context/auth-context";
 import { DashboardProvider } from "@/context/dashboard-context";
+import { IcpAuthProvider } from "@/context/icp-auth-context";
+import { lazy, Suspense } from "react";
+
+// Lazy load the ICP authentication page
+const IcpAuth = lazy(() => import("@/pages/icp-auth"));
 
 function Router() {
   return (
@@ -29,6 +34,11 @@ function Router() {
       <Route path="/settings" component={Settings} />
       <Route path="/ml-models" component={MlModels} />
       <Route path="/admin" component={Admin} />
+      <Route path="/icp-auth">
+        <Suspense fallback={<div>Loading ICP Authentication...</div>}>
+          <IcpAuth />
+        </Suspense>
+      </Route>
       <Route component={NotFound} />
     </Switch>
   );
@@ -38,10 +48,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <DashboardProvider>
-          <Router />
-          <Toaster />
-        </DashboardProvider>
+        <IcpAuthProvider>
+          <DashboardProvider>
+            <Router />
+            <Toaster />
+          </DashboardProvider>
+        </IcpAuthProvider>
       </AuthProvider>
     </QueryClientProvider>
   );
