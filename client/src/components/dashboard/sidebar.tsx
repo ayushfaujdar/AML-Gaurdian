@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { 
   Shield, AlertTriangle, BarChart3, GitGraph, FileText, 
   FileCheck, ClipboardList, Settings, Database, ShieldAlert,
-  LogIn, Key
+  LogIn, Key, Blocks
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -40,12 +40,18 @@ const Sidebar: FC<SidebarProps> = ({ className }) => {
       ],
     },
     {
+      heading: "Blockchain",
+      items: [
+        { href: "/blockchain-transactions", label: "Blockchain Transactions", icon: <Blocks className="mr-3 h-5 w-5" /> },
+        { href: "/icp-auth", label: "ICP Authentication", icon: <Key className="mr-3 h-5 w-5" /> },
+      ],
+    },
+    {
       heading: "System",
       items: [
         { href: "/settings", label: "Settings", icon: <Settings className="mr-3 h-5 w-5" /> },
         { href: "/ml-models", label: "ML Models", icon: <Database className="mr-3 h-5 w-5" /> },
         { href: "/admin", label: "Admin", icon: <ShieldAlert className="mr-3 h-5 w-5" /> },
-        { href: "/icp-auth", label: "ICP Authentication", icon: <Key className="mr-3 h-5 w-5" /> },
       ],
     },
   ];

@@ -18,8 +18,9 @@ import { DashboardProvider } from "@/context/dashboard-context";
 import { IcpAuthProvider } from "@/context/icp-auth-context";
 import { lazy, Suspense } from "react";
 
-// Lazy load the ICP authentication page
+// Lazy load the ICP pages
 const IcpAuth = lazy(() => import("@/pages/icp-auth"));
+const BlockchainTransactions = lazy(() => import("@/pages/blockchain-transactions"));
 
 function Router() {
   return (
@@ -37,6 +38,11 @@ function Router() {
       <Route path="/icp-auth">
         <Suspense fallback={<div>Loading ICP Authentication...</div>}>
           <IcpAuth />
+        </Suspense>
+      </Route>
+      <Route path="/blockchain-transactions">
+        <Suspense fallback={<div>Loading Blockchain Transactions...</div>}>
+          <BlockchainTransactions />
         </Suspense>
       </Route>
       <Route component={NotFound} />
