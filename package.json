@@ -11,6 +11,11 @@
     "db:push": "drizzle-kit push"
   },
   "dependencies": {
+    "@dfinity/agent": "^2.3.0",
+    "@dfinity/auth-client": "^2.3.0",
+    "@dfinity/candid": "^2.3.0",
+    "@dfinity/identity": "^2.3.0",
+    "@dfinity/principal": "^2.3.0",
     "@hookform/resolvers": "^3.9.1",
     "@jridgewell/trace-mapping": "^0.3.25",
     "@neondatabase/serverless": "^0.10.4",
