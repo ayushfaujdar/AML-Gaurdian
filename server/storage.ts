@@ -29,6 +29,7 @@ export interface IStorage {
   // EntityRelationship methods
   getEntityRelationship(id: string): Promise<EntityRelationship | undefined>;
   getEntityRelationshipsByEntity(entityId: string): Promise<EntityRelationship[]>;
+  getAllEntityRelationships(): Promise<EntityRelationship[]>;
   createEntityRelationship(relationship: InsertEntityRelationship): Promise<EntityRelationship>;
   
   // Transaction methods
@@ -36,10 +37,12 @@ export interface IStorage {
   getTransactionsByEntity(entityId: string): Promise<Transaction[]>;
   getAllTransactions(): Promise<Transaction[]>;
   createTransaction(transaction: InsertTransaction): Promise<Transaction>;
+  updateTransaction(id: string, update: Partial<Transaction>): Promise<Transaction | undefined>;
   
   // Alert methods
   getAlert(id: string): Promise<Alert | undefined>;
   getAlertsByEntity(entityId: string): Promise<Alert[]>;
+  getAlertsByTransaction(transactionId: string): Promise<Alert[]>;
   getAllAlerts(): Promise<Alert[]>;
   createAlert(alert: InsertAlert): Promise<Alert>;
   updateAlert(id: string, update: Partial<Alert>): Promise<Alert | undefined>;
@@ -182,6 +185,10 @@ export class MemStorage implements IStorage {
       rel => rel.sourceEntityId === entityId || rel.targetEntityId === entityId
     );
   }
+  
+  async getAllEntityRelationships(): Promise<EntityRelationship[]> {
+    return Array.from(this.entityRelationships.values());
+  }
 
   async createEntityRelationship(relationship: InsertEntityRelationship): Promise<EntityRelationship> {
     const id = generateId("R");
@@ -220,6 +227,18 @@ export class MemStorage implements IStorage {
     this.transactions.set(id, newTransaction);
     return newTransaction;
   }
+  
+  async updateTransaction(id: string, update: Partial<Transaction>): Promise<Transaction | undefined> {
+    const transaction = await this.getTransaction(id);
+    if (!transaction) return undefined;
+    
+    const updatedTransaction = { 
+      ...transaction, 
+      ...update
+    };
+    this.transactions.set(id, updatedTransaction);
+    return updatedTransaction;
+  }
 
   // Alert methods
   async getAlert(id: string): Promise<Alert | undefined> {
@@ -229,6 +248,12 @@ export class MemStorage implements IStorage {
   async getAlertsByEntity(entityId: string): Promise<Alert[]> {
     return Array.from(this.alerts.values()).filter(
       alert => alert.entityId === entityId
+    );
+  }
+  
+  async getAlertsByTransaction(transactionId: string): Promise<Alert[]> {
+    return Array.from(this.alerts.values()).filter(
+      alert => alert.transactionId === transactionId
     );
   }
   

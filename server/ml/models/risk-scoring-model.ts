@@ -601,6 +601,7 @@ export class RiskScoringModel {
     recentTransactions: Transaction[]
   ): Promise<{
     riskScore: number;
+    riskLevel: string;
     riskFactors: { factor: string; contribution: number }[];
   }> {
     if (!this.transactionModel) {
@@ -624,6 +625,9 @@ export class RiskScoringModel {
     // Convert to 0-100 scale
     const riskScore = normalizedRiskScore * 100;
     
+    // Get risk level
+    const riskLevel = this.getRiskLevel(riskScore);
+    
     // Calculate feature importance
     const riskFactors = await this.calculateTransactionRiskFactors(features);
     
@@ -631,7 +635,7 @@ export class RiskScoringModel {
     featureTensor.dispose();
     prediction.dispose();
     
-    return { riskScore, riskFactors };
+    return { riskScore, riskLevel, riskFactors };
   }
   
   /**

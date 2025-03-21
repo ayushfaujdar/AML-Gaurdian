@@ -1,4 +1,5 @@
-import { Entity, EntityRelationship, Transaction, storage } from '@shared/schema';
+import { Entity, EntityRelationship, Transaction } from '@shared/schema';
+import { storage } from '../storage';
 import { anomalyModel } from '../ml/models/anomaly-detection-model';
 import { entityNetworkModel } from '../ml/models/entity-network-model';
 import { transactionPatternModel } from '../ml/models/transaction-pattern-model';
@@ -423,9 +424,33 @@ export class MlService {
       
       const result = await transactionPatternModel.detectPatterns(transactions, entities);
       
-      // Cache the results
-      this.suspiciousPatternsCache = result.patterns;
+      // Convert transaction patterns to entity patterns format
+      const entityPatterns = result.patterns.map(pattern => {
+        // For each pattern, find the entities involved in the transactions
+        const entityIds = new Set<string>();
+        
+        // Add both source and destination entities from the transactions
+        pattern.transactions.forEach(txId => {
+          const tx = transactions.find(t => t.id === txId);
+          if (tx) {
+            entityIds.add(tx.sourceEntityId);
+            entityIds.add(tx.destinationEntityId);
+          }
+        });
+        
+        return {
+          name: pattern.name,
+          description: pattern.description,
+          entities: Array.from(entityIds),
+          confidence: pattern.confidence,
+          riskLevel: pattern.riskLevel
+        };
+      });
       
+      // Cache the converted results
+      this.suspiciousPatternsCache = entityPatterns;
+      
+      // Return the original transaction patterns format for API compatibility
       return result;
     } catch (error) {
       console.error('Error analyzing transaction patterns:', error);
