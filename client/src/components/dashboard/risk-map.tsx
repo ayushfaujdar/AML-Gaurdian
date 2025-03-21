@@ -57,9 +57,25 @@ const RiskMap: FC<RiskMapProps> = ({ className }) => {
       <CardContent className="p-6">
         <div className="relative aspect-video bg-neutral-50 rounded flex items-center justify-center h-72">
           {isLoading ? (
-            <p className="text-neutral-500">Loading risk heat map...</p>
+            <div className="flex flex-col items-center justify-center space-y-2">
+              <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary"></div>
+              <p className="text-neutral-500">Loading risk heat map...</p>
+            </div>
           ) : error ? (
-            <p className="text-red-500">Error loading risk data</p>
+            <div className="flex flex-col items-center justify-center space-y-3">
+              <p className="text-red-500 font-medium">Error loading risk data</p>
+              <Button 
+                onClick={() => useRiskData().refetch()} 
+                size="sm" 
+                variant="outline"
+                className="flex items-center gap-2"
+              >
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Retry
+              </Button>
+            </div>
           ) : (
             <>
               <div className="absolute inset-0 grid grid-cols-10 grid-rows-10 gap-px">

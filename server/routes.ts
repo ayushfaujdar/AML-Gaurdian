@@ -257,6 +257,68 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Entity network
   app.get("/api/entity-network/:entityId", getEntityNetwork);
   
+  // Entity relationships
+  app.get("/api/entity-relationships", async (req, res) => {
+    try {
+      const relationships = await storage.getAllEntityRelationships();
+      return res.json(relationships);
+    } catch (error) {
+      console.error("Error fetching entity relationships:", error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  });
+  
+  app.post("/api/entity-relationships", validateBody(insertEntityRelationshipSchema), async (req, res) => {
+    try {
+      const relationship = await storage.createEntityRelationship(req.body);
+      return res.status(201).json(relationship);
+    } catch (error) {
+      console.error("Error creating entity relationship:", error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  });
+  
+  // Risk analysis endpoints
+  app.get("/api/risk-factors", async (req, res) => {
+    try {
+      // In a real app, this would be calculated from transaction data
+      // Here we'll provide sample data for the demo
+      return res.json({
+        jurisdictional: 35,
+        transactional: 42,
+        behavioral: 28,
+        entityBased: 48
+      });
+    } catch (error) {
+      console.error("Error fetching risk factors:", error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  });
+  
+  app.get("/api/risk-distribution", async (req, res) => {
+    try {
+      const entities = await storage.getAllEntities();
+      const distribution = {
+        critical: 0,
+        high: 0,
+        medium: 0,
+        low: 0
+      };
+      
+      entities.forEach(entity => {
+        if (entity.riskLevel === "critical") distribution.critical++;
+        else if (entity.riskLevel === "high") distribution.high++;
+        else if (entity.riskLevel === "medium") distribution.medium++;
+        else distribution.low++;
+      });
+      
+      return res.json(distribution);
+    } catch (error) {
+      console.error("Error calculating risk distribution:", error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  });
+  
   // Transaction endpoints
   app.get("/api/transactions", async (req, res) => {
     try {
