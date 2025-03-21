@@ -1,0 +1,175 @@
+Design and implement an autonomous, AI-powered anti-money laundering (AML) system deployed on the Internet Computer Protocol (ICP) blockchain. This system will utilize advanced machine learning, blockchain analytics, and interconnected data sources to detect, prevent, and report money laundering activities across traditional and decentralized financial systems.
+Core System Requirements
+1. Machine Learning Components
+Develop multiple specialized ML models:
+
+Transaction pattern recognition model trained on labeled historical money laundering cases
+Entity relationship graph neural network to identify shell company structures
+Anomaly detection model utilizing unsupervised learning to flag unusual activity
+Temporal behavioral analysis model to detect changes in transaction patterns over time
+Predictive risk scoring model incorporating over 200 risk factors
+Natural language processing model for analyzing entity documentation and communications
+
+Training requirements:
+
+Utilize synthetic transaction data generated from known money laundering typologies
+Incorporate labeled datasets from financial crime databases
+Implement federated learning techniques to learn from multiple financial institutions while preserving data privacy
+Employ transfer learning from existing financial crime models
+Implement continuous learning with human feedback loops for flagged transactions
+
+2. Data Integration Architecture
+Create secure connections to:
+
+Banking core systems via encrypted API channels
+Other blockchain networks via cross-chain oracles
+International AML databases (FATF, FinCEN, Interpol)
+Company registries across multiple jurisdictions
+Ultimate beneficial ownership (UBO) databases
+Sanctions and politically exposed persons (PEP) lists
+News and media sources for adverse mentions
+Trade finance documentation systems
+Real estate transaction databases
+High-value asset registries (art, luxury goods, etc.)
+
+3. On-Chain Identity Framework
+Implement:
+
+Zero-knowledge proof system for privacy-preserving KYC/KYB verification
+Decentralized identity (DID) integration with verifiable credentials
+Cryptographic source-of-funds verification protocol
+Risk-based identity assurance levels
+Cross-jurisdictional identity verification standards
+Chain analysis for cryptocurrency source tracing
+Beneficial ownership tracking with minimum ownership thresholds by jurisdiction
+
+4. Advanced Detection Mechanisms
+Develop algorithms for:
+
+Smart structuring detection (transactions designed to avoid reporting thresholds)
+Trade-based money laundering identification through price variance analysis
+Round-trip transaction detection (funds that circulate through multiple entities)
+Shell company identification using multi-factor analysis
+Layering detection across financial systems and asset classes
+Integration techniques (final stage money laundering where funds re-enter legitimate economy)
+Correspondent banking risk analysis
+Crypto mixing and tumbling service usage detection
+Smart contract analysis for DeFi-based laundering
+Cross-border transaction monitoring with jurisdictional risk weighting
+
+5. ICP Canister Implementation
+Design system architecture with:
+
+Segregated canisters for different regulatory jurisdictions
+Scalable compute canisters for ML model execution
+Secure data storage canisters with differential privacy
+Real-time monitoring canisters with sub-second response time
+Regulatory reporting canisters customized by jurisdiction
+Administrative canisters for system governance
+Update protocols for evolving regulatory requirements
+Threshold signature schemes for sensitive operations
+Cycle management for sustainable operation
+Chain-key cryptography for secure cross-canister communication
+
+6. Governance and Compliance Framework
+Establish:
+
+Rule-based compliance engine with jurisdiction-specific parameters
+Regulatory reporting mechanisms compatible with global standards
+Suspicious activity report (SAR) generation and submission
+Evidence preservation protocols for investigation support
+Audit trail mechanisms for all system activities
+User permission hierarchy with role-based access controls
+Multi-signature approval workflows for high-risk cases
+Regular compliance certification processes
+Version control for regulatory requirement updates
+Transparency reporting with appropriate privacy safeguards
+
+7. Privacy and Security Features
+Implement:
+
+Homomorphic encryption for analyzing encrypted data
+Secure multi-party computation for cross-institution analysis
+Zero-knowledge compliance proofs for regulatory verification
+Privacy-preserving machine learning techniques
+Data minimization and purpose limitation controls
+Cryptographic access controls for sensitive information
+Time-based data retention and deletion protocols
+Tamper-evident audit logs
+Cryptographic proof of compliance generation
+Secure key management with threshold signatures
+
+Implementation Steps
+
+Research Phase
+
+Analyze global AML regulatory requirements
+Study known money laundering typologies and techniques
+Review existing AML systems and their limitations
+Engage with financial intelligence units for requirements
+Define performance metrics and success criteria
+
+
+Design Phase
+
+Create data flow architecture for all system components
+Design ML model architectures and training methodologies
+Develop API specifications for external system integration
+Design privacy-preserving protocols for data sharing
+Plan canister structure and inter-canister communication
+Design user interfaces for investigation teams
+
+
+Development Phase
+
+Implement core detection algorithms
+Develop and train ML models with synthetic and historical data
+Create data integration connectors for external systems
+Build ICP canisters following security best practices
+Develop regulatory reporting modules by jurisdiction
+Implement governance and administration systems
+
+
+Testing Phase
+
+Perform adversarial testing with simulated money laundering scenarios
+Conduct red team exercises with financial crime experts
+Test system performance under various transaction volumes
+Validate regulatory compliance across jurisdictions
+Perform privacy impact assessments
+Conduct penetration testing and security audits
+
+
+Deployment Phase
+
+Staged rollout across different financial sectors
+Integration with existing compliance workflows
+Training for financial crime investigation teams
+Establishment of feedback mechanisms for continuous improvement
+Regulatory certification and approval processes
+Integration with global financial intelligence networks
+
+
+
+Performance Requirements
+
+False positive rate below 0.1%
+False negative rate below 0.01%
+Processing latency under 500ms for real-time transactions
+Scalability to handle >100,000 transactions per second
+99.999% system availability
+Support for at least 50 regulatory jurisdictions
+Data retention compliance with global standards
+Ability to process both fiat and crypto transactions
+Support for at least 20 languages for global deployment
+Real-time adaptation to new money laundering techniques
+
+Expected Outcomes
+
+Reduction in successful money laundering attempts by >90%
+Increased efficiency in AML investigations by >75%
+Significant reduction in compliance costs for financial institutions
+Improved regulatory compliance across jurisdictions
+Enhanced transparency while maintaining privacy
+Creation of cross-institutional intelligence sharing capabilities
+Development of new industry standards for AML best practices
