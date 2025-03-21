@@ -95,7 +95,10 @@ const IcpAuth: FC = () => {
               {!isAuthenticated && !isLoading && (
                 <div className="flex items-center p-3 bg-amber-50 dark:bg-amber-950/30 text-amber-800 dark:text-amber-300 rounded-md gap-2 text-sm">
                   <AlertTriangle className="h-4 w-4 flex-shrink-0" />
-                  <p>You need to authenticate to use the decentralized features of the AML Guardian</p>
+                  <div>
+                    <p className="font-medium">Internet Identity authentication requires ICP deployment</p>
+                    <p className="mt-1">In development mode, this feature is disabled. The system will use the fallback authentication method instead.</p>
+                  </div>
                 </div>
               )}
             </div>
@@ -118,6 +121,7 @@ const IcpAuth: FC = () => {
                 className="w-full" 
                 onClick={login}
                 disabled={isLoading}
+                title="This button will attempt to authenticate with Internet Identity, but will only work when deployed on ICP"
               >
                 {isLoading ? (
                   <>
@@ -127,7 +131,7 @@ const IcpAuth: FC = () => {
                 ) : (
                   <>
                     <LogIn className="h-4 w-4 mr-2" />
-                    Log In with Internet Identity
+                    Development Mode - Fallback Auth Active
                   </>
                 )}
               </Button>
@@ -156,6 +160,18 @@ const IcpAuth: FC = () => {
               Internet Identity is a blockchain authentication system that allows you to securely access
               applications on the Internet Computer without usernames or passwords.
             </p>
+
+            <div className="p-4 my-4 bg-blue-50 border border-blue-200 rounded-md">
+              <h3 className="font-semibold text-blue-700 mb-2">Development vs. Production Mode</h3>
+              <p className="text-sm text-blue-700 mb-2">
+                <strong>Current Status:</strong> AML Guardian is running in development mode with in-memory storage.
+              </p>
+              <p className="text-sm text-blue-700">
+                In development mode, the ICP authentication functionality is simulated, and the system 
+                uses a local in-memory storage instead of the actual blockchain. To use the real ICP 
+                blockchain features, the application needs to be deployed to the Internet Computer network.
+              </p>
+            </div>
             
             <h3 className="font-semibold text-lg mt-4">Key Benefits:</h3>
             <ul className="list-disc pl-5 space-y-1">
@@ -168,7 +184,7 @@ const IcpAuth: FC = () => {
             
             <h3 className="font-semibold text-lg mt-4">AML Guardian Integration:</h3>
             <p>
-              The AML Guardian system uses Internet Computer authentication to:
+              When deployed on ICP, the AML Guardian system uses Internet Computer authentication to:
             </p>
             <ul className="list-disc pl-5 space-y-1">
               <li>Securely access your AML data stored on the blockchain</li>
