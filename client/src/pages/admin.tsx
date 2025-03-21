@@ -63,7 +63,9 @@ import {
   Send, 
   RefreshCw, 
   Download, 
-  Search 
+  Search,
+  AlertTriangle,
+  Brain
 } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { User } from "@/types";
